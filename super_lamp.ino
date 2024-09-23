@@ -33,7 +33,7 @@ int pos4 = 0;
 String header;
 
 // Setting PWM frequency, channels and bit resolution
-const int freq = 5000;
+const int freqColor = 5000;
 const int red_channel = 0;
 const int green_channel = 1;
 const int blue_channel = 2;
@@ -50,7 +50,7 @@ const long timeout_times = 2000;
 int lamp_on = 0;
 int button, button_prev;
 
-int freq1 = 2000;
+int freqMelody = 2000;
 int channel = 3;
 //int resolution = 8;
 
@@ -75,16 +75,18 @@ void setup() {
     Serial.println("\nConnected to WiFi!\n");
 
     // configure LED PWM functionalitites
-    ledcSetup(red_channel, freq, resolution);
-    ledcSetup(green_channel, freq, resolution);
-    ledcSetup(blue_channel, freq, resolution);
-    // Configure BUZZER PWMs
-    ledcSetup(channel, freq1, resolution);
-    ledcAttach(MELODY_PIN, channel);
+    /*
+    * ledcSetup(red_channel, freqColor, resolution);
+    * ledcSetup(green_channel, freqColor, resolution);
+    * ledcSetup(blue_channel, freqColor, resolution);
+    * // Configure BUZZER PWMs
+    * ledcSetup(channel, freqMelody, resolution);
+    */
     // attach the channel to the GPIO to be controlled
-    ledcAttach(RED_PIN, red_channel);
-    ledcAttach(GREEN_PIN, green_channel);
-    ledcAttach(BLUE_PIN, blue_channel);
+    ledcAttach(MELODY_PIN, freqMelody, resolution);
+    ledcAttach(RED_PIN, freqColor, resolution);
+    ledcAttach(GREEN_PIN, freqColor, resolution);
+    ledcAttach(BLUE_PIN, freqColor, resolution);
     //Configure BUTTON_ON
     pinMode(BUTTON_ON, INPUT);
     server.begin();
@@ -201,7 +203,7 @@ void loop() {
 }
 
 void singPipe(void) {
-    ledcAttach(MELODY_PIN, channel);
+    ledcAttach(MELODY_PIN, freqMelody, resolution);
 
     ledcWriteNote(channel, NOTE_E, 6);
     delay(100);
@@ -245,7 +247,7 @@ void singPipe(void) {
 }
 
 void singTheme(void) {
-    ledcAttach(MELODY_PIN, channel);
+    ledcAttach(MELODY_PIN, freqMelody, resolution);
     ledcWriteNote(channel, NOTE_E, 7);
     delay(100);
     ledcWriteTone(channel, 0);
