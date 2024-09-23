@@ -196,7 +196,6 @@ void loop() {
       ledcWrite(greenChannel, greenString.toInt());
       ledcWrite(blueChannel, blueString.toInt());
       singTheme();
-
      } else {
       botao_ant = HIGH;
       delay(400);
@@ -207,54 +206,8 @@ void loop() {
       ledcWrite(redChannel, redString.toInt());
       ledcWrite(greenChannel, greenString.toInt());
       ledcWrite(blueChannel, blueString.toInt());
-      singPipe();
     }
-
   }
-}
-
-void singPipe(void) {
-    ledcAttach(MELODY_PIN, channel);
-
-    ledcWriteNote(channel, NOTE_E, 6);
-    delay(100);
-    ledcWriteNote(channel, NOTE_D, 6);
-    delay(100);
-    ledcWriteNote(channel, NOTE_C, 6);
-    delay(100);
-    ledcWriteNote(channel, NOTE_B, 5);
-    delay(100);
-    ledcWriteNote(channel, NOTE_A, 5);
-    delay(100);
-
-    delay(100);
-
-    ledcWriteNote(channel, NOTE_E, 6);
-    delay(100);
-    ledcWriteNote(channel, NOTE_D, 6);
-    delay(100);
-    ledcWriteNote(channel, NOTE_C, 6);
-    delay(100);
-    ledcWriteNote(channel, NOTE_B, 5);
-    delay(100);
-    ledcWriteNote(channel, NOTE_A, 5);
-    delay(100);
-
-    delay(100);
-
-    ledcWriteNote(channel, NOTE_E, 6);
-    delay(100);
-    ledcWriteNote(channel, NOTE_D, 6);
-    delay(100);
-    ledcWriteNote(channel, NOTE_C, 6);
-    delay(100);
-    ledcWriteNote(channel, NOTE_B, 5);
-    delay(100);
-    ledcWriteNote(channel, NOTE_A, 5);
-    delay(100);
-
-    ledcWriteTone(channel, 0);
-    ledcDetach(MELODY_PIN);
 }
 
 void singTheme(void) {
@@ -326,5 +279,5 @@ void singTheme(void) {
    delay(30);
    ledcWriteTone(channel, 0);
    delay(3000);
-   ledcDetach(MELODY_PIN);
+   ledcDetachPin(MELODY_PIN);
 }
